@@ -1,10 +1,10 @@
 import express from "express"
 const router = express.Router()
 
-import peliculas from "../controllers/plataforma/getPlataformas.js"
+import getPlataformas from "../controllers/plataforma/getPlataformas.js"
 
 
-router.get('/:id', peliculas.getPeliculas)
+router.get('/', getPlataformas)
 
 
 export default router

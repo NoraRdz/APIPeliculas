@@ -1,13 +1,13 @@
 import pool from "../../utils/postgre.js"
 
-export async function obtenerCatalogoPeliculas(id) {
+export default async function obtenerCatalogoPeliculas(id) {
      console.log(id)
   let consultSql;
   if(id == undefined){
-    consultSql='SELECT * FROM "Platform"'
+    consultSql='SELECT * FROM platforms'
   }
   else{
-    consultSql=`SELECT * FROM "Platform" WHERE id=${id}`
+    consultSql=`SELECT * FROM platforms WHERE id=${id}`
   }
 
 //   console.log(consultSql)

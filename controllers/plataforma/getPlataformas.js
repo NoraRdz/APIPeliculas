@@ -1,6 +1,6 @@
-import { obtenerCatalogoPeliculas } from "../../models/plataforma/obtenerPlataformas.js"; 
+import  obtenerCatalogoPeliculas from "../../models/plataforma/obtenerPlataformas.js"; 
 
-async function getPeliculas(req,res){
+export default async function getPlataformas(req,res){
 
    const id = req.query.id;
     try {
@@ -21,4 +21,3 @@ async function getPeliculas(req,res){
     
 }
 
-export default {getPeliculas}

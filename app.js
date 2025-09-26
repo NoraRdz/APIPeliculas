@@ -6,13 +6,14 @@ import 'dotenv/config'
 
 const PORT = process.env.PORT
 
-import peliculas from './router/plataforma.js'
+import plataforma from './router/plataforma.js'
+import peliculas from './router/peliculas.js'
 
-
-
+app.use(express.json());
 app.use(cors())
 app.use(morgan('tiny'))
-app.use('/plataforma', peliculas)
+app.use('/plataforma', plataforma)
+app.use('/pelicula',peliculas)
 
 
 
