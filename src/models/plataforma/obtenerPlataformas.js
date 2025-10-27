@@ -1,4 +1,4 @@
-import pool from "../../utils/postgre.js"
+import pool from "../../config/postgre.js"
 
 export default async function obtenerCatalogoPeliculas(id) {
      console.log(id)

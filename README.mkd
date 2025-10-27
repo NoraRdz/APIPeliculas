@@ -1,0 +1,48 @@
+# Que puedo hacer en mi api
+
+-Ver
+    - [x] Usuarios
+    - [ ] Un solo usuario
+    - [ ] Peliculas, con calificacion  
+    - [ ] Plataforma
+    - [ ] Calificacion de usuarios a peliculas
+    - [ ] Calificacion de un usuario a peliculas
+    - [ ] Generos
+    - [ ] Peliculas de genero
+    - [ ] Peliculas de plataforma
+    - [ ] Peliculas por plataforma
+    - [ ] Peliculas por genero
+    - [ ] Peliculas de genero
+    - [ ] Calificacion de usuarios por pelicula
+    - [ ] Generos con mayor calificacion de peliculas 
+
+- Agregar
+    - [ ]  Usuarios
+    - [ ]  Peliculas
+    - [ ]  Plataforma
+    - [ ]  Calificacion de usuario a pelicula
+    - [ ]  Generos 
+    - [ ]  Pelicula a plataforma
+    - [ ]  Genero a pelicula
+
+- Modificar
+    - [ ]  Usuarios
+    - [ ]  Peliculas
+    - [ ]  Plataforma
+    - [ ]  Calificacion de usuario
+    - [ ]  Generos 
+    - [ ]  Genero a pelicula
+- Eliminar
+    - [ ]  Usuarios
+    - [ ]  Peliculas
+    - [ ]  Plataforma
+    - [ ]  Calificacion de usuario
+    - [ ]  Generos 
+    - [ ]  Pelicula a plataforma
+
+    *agregar*
+    - ubicacion de imagen de pelicula
+    - imagen pelicula
+    - Autenticacion
+    - JWT 
+    
