@@ -1,13 +1,13 @@
 import express from "express"
 const router = express.Router()
 
-import getPlataformas from "../controllers/plataforma/getPlataformas.js"
+import getPlataformas from "../controllers/plataforma/obtenerPlataformas.js"
 
 
 /**
  * @swagger
  * tags:
- *   name: Películas
+ *   name: Plataformas
  *   description: Endpoints para gestionar las plataformas disponibles
  */
 
@@ -15,11 +15,11 @@ import getPlataformas from "../controllers/plataforma/getPlataformas.js"
  * @swagger
  * /plataforma:
  *   get:
- *     summary: Obtiene la lista de todas las películas
- *     tags: [Películas]
+ *     summary: Obtiene la lista de todas las plataformas (y sus películas)
+ *     tags: [Plataformas]
  *     responses:
  *       200:
- *         description: Lista de películas obtenida correctamente
+ *         description: Lista obtenida correctamente
  *         content:
  *           application/json:
  *             schema:

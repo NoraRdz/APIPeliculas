@@ -1,44 +1,45 @@
 # Que puedo hacer en mi api
 
 -Ver
-    - [x] Usuarios
-    - [ ] Un solo usuario
-    - [ ] Peliculas, con calificacion  
-    - [ ] Plataforma
-    - [ ] Calificacion de usuarios a peliculas
-    - [ ] Calificacion de un usuario a peliculas
-    - [ ] Generos
-    - [ ] Peliculas de genero
-    - [ ] Peliculas de plataforma
-    - [ ] Peliculas por plataforma
-    - [ ] Peliculas por genero
-    - [ ] Peliculas de genero
-    - [ ] Calificacion de usuarios por pelicula
-    - [ ] Generos con mayor calificacion de peliculas 
+    - Usuario
+        - [x] Usuarios
+        - [x] Un solo usuario
+        - [x] Calificacion de un usuario a peliculas
+    - Pelicula
+        - [x] Peliculas, con calificacion  
+        - [x] Generos
+        - [x] Peliculas de genero
+        - [x] Peliculas por genero
+        - [x] Peliculas de plataforma
+        - [x] Calificacion de usuarios por pelicula (por plataforma)
+        - [x] Calificacion de usuarios por pelicula (en general)
+    - Plataforma
+        - [ ] Plataforma
+
+    
 
 - Agregar
-    - [ ]  Usuarios
-    - [ ]  Peliculas
+    -Usuario
+        - [ ]  Usuarios
+        - [ ]  Calificacion de usuario a pelicula
+    -Pelicula
+        - [ ]  Peliculas
+        - [ ]  Generos 
+        - [ ]  Pelicula a plataforma
+        - [ ]  Genero a pelicula
+    -Platafotma
     - [ ]  Plataforma
-    - [ ]  Calificacion de usuario a pelicula
-    - [ ]  Generos 
-    - [ ]  Pelicula a plataforma
-    - [ ]  Genero a pelicula
 
 - Modificar
-    - [ ]  Usuarios
-    - [ ]  Peliculas
+    -Usuario
+        - [ ]  Usuarios
+        - [ ]  Calificacion de usuario
+    -Pelicula
+        - [ ]  Peliculas
+        - [ ]  Generos 
+        - [ ]  Genero a pelicula
+    -Platafotma
     - [ ]  Plataforma
-    - [ ]  Calificacion de usuario
-    - [ ]  Generos 
-    - [ ]  Genero a pelicula
-- Eliminar
-    - [ ]  Usuarios
-    - [ ]  Peliculas
-    - [ ]  Plataforma
-    - [ ]  Calificacion de usuario
-    - [ ]  Generos 
-    - [ ]  Pelicula a plataforma
 
     *agregar*
     - ubicacion de imagen de pelicula

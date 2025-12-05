@@ -1,4 +1,4 @@
-
+const PORT = process.env.PORT || 8003
 
 const swaggerOptions = {
     definition:{
@@ -10,11 +10,13 @@ const swaggerOptions = {
          },
         servers: [
             {
-                url:'http://localhost:8003'
+                url:'http://localhost:PORT'.replace('PORT', PORT),
+                description: 'Servidor local'
             }
         ]
     },
-    apis:['../router/*.js']
+    // Cambiado para apuntar a los archivos reales dentro de src/router
+    apis:['./src/router/*.js']
 }
-
+ 
 export default swaggerOptions
