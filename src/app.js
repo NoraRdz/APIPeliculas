@@ -8,7 +8,10 @@ import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerOptions from './config/swaggerOptions.js'
 import redoc from 'redoc-express'
 import path from 'path'
+import {createTables as crearTabla} from './config/postgre.js';
 const PORT = process.env.PORT 
+
+crearTabla();
 
 
 app.use(express.json());
@@ -52,6 +55,7 @@ app.use('/genero', generos)
 
 import notFound from './middleware/error/notFound.js'
 import  errorHandler  from "./middleware/error/errorHandler.js";
+import { createTables } from './config/postgre.js'
 
 // Registrar notFound antes del manejador de errores
 app.use(notFound)

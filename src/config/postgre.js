@@ -10,7 +10,7 @@ const pool = new Pool({
 
 
 
-export const createTables = async () => {
+const createTables = async () => {
   try {
     await pool.query(`
           -- Tabla users
@@ -74,4 +74,4 @@ export const createTables = async () => {
   }
 };
 
-export default pool;
+export {pool,createTables};

@@ -3,7 +3,7 @@
  * @module Models/plataforma/obtenerCatalogoPlataformas
  */
 
-import pool from "../../config/postgre.js"
+import {pool} from "../../config/postgre.js"
 
 /**
  * Obtiene todas las plataformas o una plataforma específica según su ID.

@@ -3,7 +3,7 @@
  * @module Models/peliculas/extraerPeliculas
  */
 
-import pool from '../../config/postgre.js'
+import {pool} from '../../config/postgre.js'
 
 /**
  * Obtiene todas las películas registradas junto con sus géneros, plataformas,

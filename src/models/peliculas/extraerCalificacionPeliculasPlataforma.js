@@ -1,4 +1,4 @@
-import pool from '../../config/postgre.js';
+import {pool} from '../../config/postgre.js';
 
 /**
  * @module Models/peliculas/extraerCalificacionPeliculasPlataforma

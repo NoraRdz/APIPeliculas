@@ -1,4 +1,4 @@
-import pool from "../../config/postgre.js";
+import {pool} from "../../config/postgre.js";
 
 /**
  * Inserta un nuevo usuario en la base de datos.

@@ -3,7 +3,7 @@
  * @module Models/usuarios/extraerUsuario
  */
 
-import pool from '../../config/postgre.js'
+import {pool} from '../../config/postgre.js'
 
 /**
  * Busca un usuario en la base de datos por su ID.

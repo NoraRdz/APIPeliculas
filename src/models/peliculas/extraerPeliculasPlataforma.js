@@ -3,7 +3,7 @@
  * @module Models/peliculas/extraerPeliculasPlataforma
  */
 
-import pool from '../../config/postgre.js'
+import {pool} from '../../config/postgre.js'
 
 /**
  * Obtiene el catálogo de películas pertenecientes a una plataforma específica,
