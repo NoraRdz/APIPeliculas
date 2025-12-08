@@ -6,6 +6,9 @@ const pool = new Pool({
   database: process.env.DB_NAME||process.env.PGDATABASE,
   password: process.env.DB_PASSWORD||process.env.PGPASSWORD,
   port: process.env.DB_PORT||process.env.PGPORT, // Puerto por defecto de PostgreSQL
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 
