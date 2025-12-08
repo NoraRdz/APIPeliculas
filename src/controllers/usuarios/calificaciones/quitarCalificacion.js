@@ -4,8 +4,7 @@ import eliminarCalificacion from "../../../models/calificaciones/eliminarCalific
  * Controlador para eliminar una calificación.
  * Requiere los IDs compuestos (usuario, película, plataforma) para identificar el registro.
  *
- * @module quitarCalificacion
- * @namespace Controllers
+ * @module Controller/usuario/calificaciones/quitarCalificacion
  * @param {Object} req - Objeto de solicitud.
  * @param {Object} req.body - Objeto con {user_id, movie_id, platform_id}.
  * @param {Object} res - Objeto de respuesta.
@@ -16,8 +15,14 @@ export default async function quitarCalificacion(req,res){
      try {
             const result = await eliminarCalificacion(data);
             console.log(result)
+            if(result.rowCount === 0){
+                return res.status(404).json({
+                    message: "Calificación no encontrada"
+                })
+            }
             res.status(200).json({
-                result
+                status: "Calificación eliminada",
+                data: result.rows
             })
     
         } catch (error) {

@@ -3,8 +3,7 @@
  * Se ejecuta cuando una solicitud entrante no coincide con ninguna ruta definida en la aplicación.
  * Crea un objeto Error con un mensaje descriptivo y establece el estado HTTP a 404.
  *
- * @module notFound
- * @namespace Middleware
+ * @module Middleware/notFound
  * @param {Object} req - Objeto de solicitud de Express.
  * @param {string} req.originalUrl - La URL original solicitada por el cliente.
  * @param {Object} res - Objeto de respuesta de Express.

@@ -1,43 +1,43 @@
 /**
  * Módulo para obtener películas filtradas por género.
- * @namespace Models
- * @module extraerPeliculasGeneros
+ * @module Models/peliculas/extraerPeliculasGeneros
  */
 
 import pool from '../../config/postgre.js'
 
 /**
- * Busca y retorna las películas asociadas a un género específico.
+ * Obtiene todas las películas asociadas a un género específico.
  *
- * Esta función realiza una consulta uniendo las tablas de películas y géneros
- * (mediante la tabla intermedia `movie_genre`) para filtrar los resultados
- * basándose en el nombre del género proporcionado.
+ * La función consulta la base de datos uniendo las tablas `movies`, `genre`
+ * y la tabla intermedia `movie_genre`, de modo que pueda devolver únicamente
+ * aquellas películas que correspondan al nombre del género solicitado.
  *
- * @alias module:extraerPeliculasGeneros
- * @function
+ * @async
+ * @function extraerPeliculasGeneros
+ * @param {string} name - Nombre del género a filtrar (por ejemplo: "Terror", "Comedia").
  *
- * @param {string} name - Nombre del género a buscar (ej. "Terror", "Comedia").
+ * @returns {Promise<Array<Object>|string>} Retorna un arreglo de objetos con:
+ *   - {string} title — Título de la película.
+ *   - {string} nombre — Nombre del género.
  *
- * @returns {Promise<Array<Object>|string>} Retorna un arreglo de objetos con la siguiente estructura:
- * - {string} title — Título de la película.
- * - {string} nombre — Nombre del género asociado.
- *
- * Si ocurre un error en la conexión o consulta, retorna el mensaje "Error en el servidor".
+ * Si ocurre algún error durante la consulta, se devuelve el texto `"Error en el servidor"`.
  */
 export default async function extraerPeliculasGeneros(name) {
 
   try {
     const result = await pool.query(
-        `select m.title, g.nombre
-            from movie_genre as mg
-            left join movies as m on (m.id=mg.movie_id)
-            left join genre as g on (g.id=mg.genre_id)
-            where g.nombre = $1`,
-            [name]
+      `SELECT 
+          m.title, 
+          g.nombre
+       FROM movie_genre AS mg
+       LEFT JOIN movies AS m ON m.id = mg.movie_id
+       LEFT JOIN genre AS g ON g.id = mg.genre_id
+       WHERE g.nombre = $1`,
+      [name]
     );
 
-    // console.table(result.rows); // Muestra los usuarios en la consola
     return result.rows;
+
   } catch (err) {
     console.error(err);
     return "Error en el servidor";

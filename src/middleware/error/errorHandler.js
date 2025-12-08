@@ -3,8 +3,7 @@
  * Captura errores generados en cualquier parte de la aplicación y envía una respuesta JSON estandarizada.
  * Oculta la pila de llamadas (stack trace) en entornos de producción por seguridad.
  *
- * @module errorHandler
- * @namespace Middleware
+ * @module Middleware/errorHandler
  * @param {Object} err - Objeto del error interceptado.
  * @param {number} [err.status] - Código de estado HTTP del error (por defecto 500).
  * @param {string} [err.message] - Mensaje descriptivo del error.

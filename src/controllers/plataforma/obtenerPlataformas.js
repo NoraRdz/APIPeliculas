@@ -4,12 +4,11 @@ import obtenerCatalogoPeliculas from "../../models/plataforma/obtenerPlataformas
  * Controlador para obtener plataformas.
  * Puede retornar todas las plataformas o una específica si se envía el ID por query.
  *
- * @module obtenerPlataformas
- * @namespace Controllers
- * * @param {Object} req - Objeto de solicitud.
+ * @module Controller/plataforma/obtenerPlataformas
+ * @param {Object} req - Objeto de solicitud.
  * @param {number} [req.query.id] - ID opcional de la plataforma a buscar.
  * @param {Object} res - Objeto de respuesta.
- * * @returns {void} Retorna JSON con la data de plataformas.
+ * @returns {void} Retorna JSON con la data de plataformas.
  */
 export default async function obtenerPlataformas(req,res){
 

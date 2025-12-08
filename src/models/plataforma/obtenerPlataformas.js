@@ -1,47 +1,44 @@
 /**
  * Módulo para gestionar el catálogo de plataformas de streaming.
- * @module obtenerCatalogoPlataformas
- * @namespace Models
+ * @module Models/plataforma/obtenerCatalogoPlataformas
  */
 
 import pool from "../../config/postgre.js"
 
 /**
- * Obtiene la lista de plataformas registradas o una plataforma específica.
+ * Obtiene todas las plataformas o una plataforma específica según su ID.
  *
- * Esta función consulta la tabla `platforms` y tiene un comportamiento dinámico:
- * 1. Si no se proporciona un `id`, devuelve el listado completo de todas las plataformas.
- * 2. Si se proporciona un `id`, devuelve únicamente la plataforma que coincida con ese identificador.
+ * - Si no se proporciona `id`, la función retorna todo el catálogo de plataformas.
+ * - Si se proporciona `id`, retorna únicamente la plataforma correspondiente.
  *
  * @alias module:obtenerCatalogoPlataformas
  * @function
  *
- * @param {number|string} [id] - (Opcional) ID de la plataforma a buscar. Si se omite, se retornan todas.
+ * @param {number|string} [id] - (Opcional) Identificador de la plataforma.
  *
- * @returns {Promise<Array<Object>|string>} Retorna un arreglo de objetos que representan las plataformas.
- * Generalmente incluye campos como:
- * - {number} id - Identificador de la plataforma.
- * - {string} p_name - Nombre de la plataforma.
+ * @returns {Promise<Array<Object>|string>} Arreglo de plataformas encontradas o un mensaje de error.
+ * Cada plataforma incluye por lo general:
+ * - {number} id — Identificador único.
+ * - {string} p_name — Nombre de la plataforma.
  *
- * En caso de error en la consulta, retorna el mensaje "Error en el servidor".
+ * En caso de error, retorna "Error en el servidor".
  */
 export default async function obtenerCatalogoPlataformas(id) {
-     console.log(id)
-  let consultSql;
-  if(id == undefined){
-    consultSql='SELECT * FROM platforms'
-  }
-  else{
-    consultSql=`SELECT * FROM platforms WHERE id=${id}`
-  }
-
-//   console.log(consultSql)
-
   try {
-    const result = await pool.query(consultSql);
 
-    console.table(result.rows); // Muestra los usuarios en la consola
+    let query = "SELECT * FROM platforms";
+    let params = [];
+
+    if (id !== undefined) {
+      query = "SELECT * FROM platforms WHERE id = $1";
+      params = [id];
+    }
+
+    const result = await pool.query(query, params);
+
+    console.table(result.rows);
     return result.rows;
+
   } catch (err) {
     console.error(err);
     return "Error en el servidor";

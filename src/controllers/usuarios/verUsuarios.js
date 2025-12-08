@@ -1,7 +1,6 @@
 /**
  * Controlador para obtener y retornar todos los usuarios registrados en la base de datos.
- * @namespace Controllers
- * @module verUsuarios
+ * @module Controller/usuario/verUsuarios
 */
 import extraerUsuarios from "../../models/usuarios/extraerUsuarios.js";
 

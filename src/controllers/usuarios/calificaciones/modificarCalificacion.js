@@ -3,8 +3,7 @@ import actualizarCalificacion from "../../../models/calificaciones/actualizarCal
 /**
  * Controlador para modificar una calificación existente.
  *
- * @module modificarCalificacion
- * @namespace Controllers
+ * @module Controller/usuario/calificaciones/modificarCalificacion
  * @param {Object} req - Objeto de solicitud.
  * @param {Object} req.body - Datos actualizados (rating, review, etc.).
  * @param {Object} res - Objeto de respuesta.
@@ -15,8 +14,11 @@ export default async function modificarCalificacion(req,res){
      try {
             const result = await actualizarCalificacion(data);
             console.log(result)
+
+
             res.status(200).json({
-                result
+                message: "Calificación actualizada correctamente",
+                data:result
             })
     
         } catch (error) {

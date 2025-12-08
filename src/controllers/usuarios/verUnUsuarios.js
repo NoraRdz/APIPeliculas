@@ -3,8 +3,7 @@ import extraerUsuario from "../../models/usuarios/extraerUsuario.js";
 /**
  * Controlador para buscar un usuario específico por su ID.
  *
- * @module verUnUsuario
- * @namespace Controllers
+ * @module Controller/usuario/verUnUsuario
  * @param {Object} req - Objeto de solicitud.
  * @param {string|number} req.params.id - ID del usuario a buscar.
  * @param {Object} res - Objeto de respuesta.

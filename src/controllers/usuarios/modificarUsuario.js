@@ -3,8 +3,7 @@ import actualizarUsuario from "../../models/usuarios/actualizarUsuario.js";
 /**
  * Controlador para actualizar los datos de un usuario.
  *
- * @module modificarUsuario
- * @namespace Controllers
+ * @module Controller/usuario/modificarUsuario
  * @param {Object} req - Objeto de solicitud.
  * @param {Object} req.body - Datos a actualizar (id obligatorio, demás opcionales).
  * @param {number} req.body.id - Identificador del usuario.

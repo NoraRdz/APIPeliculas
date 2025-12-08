@@ -1,47 +1,48 @@
-/**
- * Módulo para obtener el historial de calificaciones de un usuario.
- * @module extraerCalificacionesUsuario
- * @namespace Models
- */
+import pool from '../../config/db.js';
 
-import pool from '../../config/postgre.js'
+/**
+ * @module Models/calificaciones/extraerCalificacionesUsuario
+ * @description Obtiene el historial de calificaciones realizadas por un usuario,
+ * incluyendo el título de la película, la puntuación y la plataforma asociada.
+ */
 
 /**
  * Consulta las calificaciones realizadas por un usuario específico.
  *
- * Esta función recupera el historial de actividad de un usuario, mostrando
- * qué películas ha calificado, qué puntaje les dio y en qué plataforma.
- * Realiza un JOIN entre las tablas `rating`, `movies` y `platforms` filtrando
- * por el ID del usuario proporcionado.
+ * Realiza un JOIN entre `rating`, `movies` y `platforms`, filtrando por el ID del usuario.
+ * Devuelve el listado completo de las calificaciones realizadas.
  *
- * @alias module:extraerCalificacionesUsuario
- * @function
+ * @async
+ * @function extraerCalificacionesUsuario
  *
- * @param {number|string} id - Identificador único del usuario (user_id).
+ * @param {number|string} id - ID del usuario cuyas calificaciones se desean obtener.
  *
- * @returns {Promise<Array<Object>|string>} Retorna un arreglo de objetos con la siguiente estructura:
- * - {string} title — Título de la película calificada.
- * - {number} rating — Puntuación otorgada por el usuario.
- * - {string} p_name — Nombre de la plataforma asociada.
+ * @returns {Promise<Object[]>} Lista de calificaciones, cada una con:
+ * @returns {string} return[].title - Título de la película.
+ * @returns {number} return[].rating - Puntuación otorgada.
+ * @returns {string} return[].p_name - Nombre de la plataforma.
  *
- * En caso de error en la consulta, retorna el mensaje "Error en el servidor".
+ * @throws {string} "Error en el servidor" Si ocurre un fallo en la consulta.
  */
 export default async function extraerCalificacionesUsuario(id) {
-
   try {
-    const result = await pool.query(
-        `select m.title, r.rating, p.p_name 
-        from rating as r
-        join movies as m on (r.movie_id = m.id)
-        join platforms as p on (r.platform_id=p.id)
-        where user_id=$1`,
-        [id]
-    );
+    const query = `
+      SELECT 
+        m.title, 
+        r.rating, 
+        p.p_name
+      FROM rating AS r
+      INNER JOIN movies AS m ON r.movie_id = m.id
+      INNER JOIN platforms AS p ON r.platform_id = p.id
+      WHERE r.user_id = $1
+      ORDER BY m.title ASC;
+    `;
 
-    console.table(result.rows);
+    const result = await pool.query(query, [id]);
+
     return result.rows;
   } catch (err) {
-    console.error(err);
-    return "Error en el servidor";
+    console.error("Error al extraer calificaciones del usuario:", err);
+    throw "Error en el servidor";
   }
 }

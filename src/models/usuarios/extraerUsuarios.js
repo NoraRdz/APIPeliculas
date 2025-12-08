@@ -1,31 +1,35 @@
-/**
- * Módulo para obtener el listado completo de usuarios.
- * @module extraerUsuarios 
- * @namespace Models
-*/
-
-import pool from '../../config/postgre.js'
+import pool from "../../config/postgre.js";
 
 /**
- * Recupera todos los usuarios registrados en la base de datos.
+ * Actualiza la información de un usuario existente.
+ * Utiliza COALESCE en SQL para mantener los valores actuales si los nuevos son nulos.
  *
- * Esta función ejecuta una consulta a la tabla `users` sin ningún filtro,
- * devolviendo la información completa de todos los registros existentes.
- * Útil para listados administrativos o reportes generales.
+ * @module Models/usuarios/actualizarUsuario
  *
- * @alias module:extraerUsuarios
- * @function
+ * @param {Object} usuario - Objeto con los datos a actualizar.
+ * @param {number} usuario.id - ID del usuario a modificar.
+ * @param {string} [usuario.email] - Nuevo correo electrónico (opcional).
+ * @param {string} [usuario.password] - Nueva contraseña (opcional).
  *
- * @returns {Promise<Array<Object>|string>} Retorna un arreglo de objetos, donde cada objeto
- * representa un usuario con todos sus campos (id, nombre, email, etc.).
- *
- * En caso de error de conexión o consulta, devuelve el mensaje "Error en el servidor".
+ * @returns {Promise<Array<Object>|string>} Retorna el registro actualizado.
+ * Si ocurre un error, retorna "Error en el servidor".
  */
-export default async function extraerUsuarios() {
-
+export default async function actualizarUsuario(usuario) {
   try {
     const result = await pool.query(
-        'select * from users'
+      `
+        UPDATE users 
+        SET 
+            email    = COALESCE($1, email),
+            password = COALESCE($2, password)
+        WHERE id = $3
+        RETURNING *
+      `,
+      [
+        usuario.email || null,
+        usuario.password || null,
+        usuario.id
+      ]
     );
 
     console.table(result.rows);

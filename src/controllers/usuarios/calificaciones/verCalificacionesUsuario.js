@@ -3,8 +3,7 @@ import extraerCalificacionesUsuario from "../../../models/calificaciones/extraer
 /**
  * Controlador para obtener el historial de calificaciones de un usuario.
  *
- * @module verCalificacionesUsuario
- * @namespace Controllers
+ * @module Controller/usuario/calificaciones/verCalificacionesUsuario
  * @param {Object} req - Objeto de solicitud.
  * @param {string|number} req.params.id - ID del usuario.
  * @param {Object} res - Objeto de respuesta.

@@ -1,43 +1,40 @@
+import pool from '../../config/postgre.js';
+
 /**
- * Modelo de acceso a datos para Películas.
- * Aquí se definen las consultas a la base de datos relacionadas con la tabla 'movies'.
- * @module agregarPeliculas
- * @namespace Models
- * 
+ * @module Models/peliculas/agregarPeliculas
+ * @description Modelo encargado de insertar nuevas películas en la base de datos.
  */
 
-import pool from '../../config/postgre.js'
-
 /**
- * Inserta una nueva película en la base de datos.
+ * Inserta una nueva película en la tabla `movies`.
  *
- * Esta función registra una película en la tabla `movies` utilizando los valores
- * proporcionados para título, año de estreno y sinopsis.  
- * Devuelve el registro insertado si la operación es exitosa.
- *
- * @author Nora Adriana Rodríguez López
+ * @async
+ * @function agregarPeliculas
  *
  * @param {string} titulo - Título de la película.
  * @param {string|number} estreno - Año de estreno de la película.
  * @param {string} sinopsis - Descripción o sinopsis de la película.
  *
- * @returns {Promise<object|string>} Un objeto con la información de la película insertada,
- * o un mensaje de error en caso de fallo.
+ * @returns {Promise<object>} Objeto con la información de la película insertada.
+ *
+ * @throws {string} "Error en el servidor" Si ocurre un error durante la consulta.
+ *
+ * @author
+ * Nora Adriana Rodríguez López
  */
-export default async function agregarPeliculas(titulo,estreno,sinopsis) {
-
+export default async function agregarPeliculas(titulo, estreno, sinopsis) {
   try {
-    const result = await pool.query(
-     `INSERT INTO movies(title,release_year,sinopsis)
-      VALUES($1, $2, $3)
-        RETURNING *;`,
-        [titulo, estreno ,sinopsis]
-    );
+    const query = `
+      INSERT INTO movies (title, release_year, sinopsis)
+      VALUES ($1, $2, $3)
+      RETURNING *;
+    `;
 
-    console.table(result.rows); // Muestra los usuarios en la consola
+    const result = await pool.query(query, [titulo, estreno, sinopsis]);
     return result.rows[0];
+
   } catch (err) {
-    console.error(err);
-    return {error:true,message:"Error en el servidor"};
+    console.error("Error al agregar película:", err);
+    throw "Error en el servidor";
   }
 }

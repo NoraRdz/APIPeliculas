@@ -2,44 +2,45 @@ import extraerPeliculasGeneros from "../../models/peliculas/extraerPeliculasGene
 import extraerPeliculasPorGeneros from "../../models/peliculas/extraerPeliculasPorGeneros.js";
 
 /**
- * Controlador para gestionar la visualización de películas por géneros.
- * - Si se envía `name` en query: filtra películas de ese género.
- * - Si no se envía: devuelve conteo de películas por género.
+ * Controlador para gestionar la visualización de películas por género.
  *
- * @module verPeliculasGeneros
- * @namespace Controllers
- * @param {Object} req - Objeto de solicitud.
- * @param {string} [req.query.name] - Nombre del género para filtrar.
- * @param {Object} res - Objeto de respuesta.
- * @returns {void} JSON con películas filtradas o lista de géneros con conteo.
+ * - Si se envía `name` en los query params, filtra las películas pertenecientes a ese género.
+ * - Si no se envía, devuelve el conteo total de películas agrupadas por género.
+ *
+ * @module Controller/peliculas/verPeliculasGeneros
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {string} [req.query.name] - Nombre del género a filtrar.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {void} Envía un JSON con las películas filtradas o el listado de géneros con su conteo.
  */
-export default async function verPeliculasGeneros(req,res) {
-    const name=req.query.name
-    let result
-    try {
+export default async function verPeliculasGeneros(req, res) {
+    const name = req.query.name;
+    let result;
 
-        if(name){
-            result =  await extraerPeliculasGeneros(name)
-        }else{
-            result =  await extraerPeliculasPorGeneros()
+    try {
+        if (name) {
+            result = await extraerPeliculasGeneros(name);
+        } else {
+            result = await extraerPeliculasPorGeneros();
         }
-        
-        if(!result || result.length === 0){
-        return res.status(404).json({
-            "success": false,
-            "message": "El genero de peliculas solicitado no existe"
-        })
+
+        if (!result || result.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "El género solicitado no existe o no tiene películas registradas."
+            });
         }
+
         res.status(200).json({
-           "success": true,
-            "message": "Generos de peliculas obtenidos correctamente",
-            "data": result
-        })
+            success: true,
+            message: "Películas por género obtenidas correctamente.",
+            data: result
+        });
 
     } catch (error) {
-         res.status(500).json({
-            "success": false,
-            "message": "Ocurrió un error inesperado",
-        })
+        res.status(500).json({
+            success: false,
+            message: "Ocurrió un error inesperado."
+        });
     }
 }

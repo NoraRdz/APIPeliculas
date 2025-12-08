@@ -15,10 +15,10 @@ if (!fs.existsSync(defaultFolder)) fs.mkdirSync(defaultFolder, { recursive: true
  * Función fábrica para configurar una instancia de Multer con almacenamiento en disco.
  * Permite personalizar el directorio de destino y la estrategia de nombrado de archivos.
  *
- * @module createUpload
- * @namespace Middleware
+ * @module Middleware/createUpload
  * @param {Object} config - Objeto de configuración.
- * @param {string} [config.directory] - Ruta absoluta del directorio donde se guardarán los archivos. Por defecto: `src/public/archives`.
+ * @param {string} [config.directory] - Ruta absoluta del directorio donde se guardarán los archivos. 
+ *                                      Por defecto: `src/public/archives`.
  * @param {Function} [config.filename] - Función personalizada para nombrar el archivo `(req, file, cb)`.
  *
  * @description
@@ -62,7 +62,43 @@ function createUpload({ directory = defaultFolder, filename: filenameFn } = {}) 
   return multer({ storage });
 }
 
-// Export por defecto el uploader con comportamiento base
+/**
+ * Middleware base de carga de archivos.
+ *
+ * @module Middleware/multer.upload
+ * @type {Multer}
+ *
+ * @description
+ * Este middleware es una instancia de Multer configurada con:
+ * - Directorio por defecto: `src/public/archives`
+ * - Estrategia de nombrado automática con timestamp
+ *
+ * Uso típico en rutas:
+ * ```js
+ * // Cargar un solo archivo
+ * router.post('/subir', upload.single('archivo'), controlador);
+ *
+ * // Cargar varios archivos
+ * router.post('/subir', upload.array('archivos', 5), controlador);
+ *
+ * // Cargar distintos campos
+ * router.post('/subir', upload.fields([
+ *   { name: 'foto', maxCount: 1 },
+ *   { name: 'documentos', maxCount: 3 }
+ * ]), controlador);
+ * ```
+ *
+ * Para personalizar directorios o nombres:
+ * ```js
+ * import { createUpload } from './upload.js';
+ * const customUpload = createUpload({
+ *   directory: '/ruta/personalizada',
+ *   filename: (req, file, cb) => {
+ *     cb(null, 'custom-' + Date.now() + path.extname(file.originalname));
+ *   }
+ * });
+ * ```
+ */
 const upload = createUpload();
 
 export default upload;

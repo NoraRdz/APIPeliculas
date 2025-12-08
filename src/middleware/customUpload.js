@@ -4,9 +4,8 @@ import { createUpload } from './multer.js';
  * Configuración personalizada de Multer para la subida de archivos de películas.
  * Define cómo se nombrará el archivo basado en el título de la película enviado en el body.
  *
- * @module customUpload
- * @namespace Middleware
- * * @description
+ * @module Middleware/customUpload
+ * @description
  * - **Filename**: Reemplaza espacios en el título por guiones y conserva la extensión original.
  * - Si no hay título en el body, usa un comportamiento fallback (vacío o timestamp según multer.js).
  */

@@ -29,8 +29,7 @@ const rules = [
  * 2. Ejecuta las validaciones de `express-validator` sobre los campos del formulario (`req.body`).
  * * Si hay errores en la subida o en la validación de datos, retorna un error y detiene el flujo.
  * Si todo es correcto, pasa el control al siguiente controlador.
- * * @module validacionPelicula
- * @namespace Middleware
+ * @module Middleware/validacionPelicula
  * @param {Object} req - Objeto de solicitud de Express.
  * @param {Object} res - Objeto de respuesta de Express.
  * @param {Function} next - Función para pasar al siguiente middleware/controlador.

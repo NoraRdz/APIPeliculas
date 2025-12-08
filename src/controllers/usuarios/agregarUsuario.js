@@ -4,12 +4,11 @@ import insertarUsuario from "../../models/usuarios/insertarUsuario.js";
  * Controlador para registrar un nuevo usuario.
  * Valida que los campos requeridos estén presentes antes de llamar al modelo.
  *
- * @module agregarUsuario
- * @namespace Controllers
- * * @param {Object} req - Objeto de solicitud (request).
+ * @module Controller/usuario/agregarUsuario
+ * @param {Object} req - Objeto de solicitud (request).
  * @param {Object} req.body - Cuerpo de la solicitud con {username, email, password}.
  * @param {Object} res - Objeto de respuesta (response).
- * * @returns {void} Retorna un JSON con el usuario creado o un mensaje de error.
+ * @returns {void} Retorna un JSON con el usuario creado o un mensaje de error.
  */
 export default async function agregarUsuario(req,res){
     const usuario = req.body

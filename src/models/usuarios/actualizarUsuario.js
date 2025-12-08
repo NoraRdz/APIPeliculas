@@ -2,35 +2,36 @@ import pool from "../../config/postgre.js";
 
 /**
  * Actualiza la información de un usuario existente.
- * Utiliza COALESCE en SQL para mantener los valores actuales si los nuevos son nulos.
  *
- * @module actualizarUsuario
- * @namespace Models
- * * @param {Object} usuario - Objeto con los datos a actualizar.
+ * Esta función utiliza COALESCE dentro de la consulta SQL para mantener los
+ * valores actuales cuando los nuevos campos llegan como null o undefined.
+ *
+ * @module Models/usuarios/actualizarUsuario
+ *
+ * @param {Object} usuario - Objeto con los datos a actualizar.
  * @param {number} usuario.id - ID del usuario a modificar.
- * @param {string} [usuario.username] - Nuevo nombre de usuario (opcional).
  * @param {string} [usuario.email] - Nuevo correo electrónico (opcional).
  * @param {string} [usuario.password] - Nueva contraseña (opcional).
- * * @returns {Promise<Array<Object>|string>} Retorna el registro actualizado.
- * Si ocurre un error, retorna "Error en el servidor".
+ *
+ * @returns {Promise<Array<Object>|string>} Retorna el registro actualizado del usuario.
+ * Si ocurre un error, retorna el mensaje: "Error en el servidor".
  */
 export default async function actualizarUsuario(usuario) {
-
-    try {
+  try {
     const result = await pool.query(
-    `
-        UPDATE users 
-        SET 
-            username = COALESCE($1, username),
-            email    = COALESCE($2, email),
-            password = COALESCE($3, password)
-        WHERE id = $4
-        RETURNING *
-        `,[ usuario.username || null, 
-            usuario.email    || null,
-            usuario.password || null,
-            usuario.id
-        ]
+      `
+      UPDATE users 
+      SET 
+        email    = COALESCE($1, email),
+        password = COALESCE($2, password)
+      WHERE id = $3
+      RETURNING *;
+      `,
+      [
+        usuario.email ?? null,
+        usuario.password ?? null,
+        usuario.id
+      ]
     );
 
     console.table(result.rows);

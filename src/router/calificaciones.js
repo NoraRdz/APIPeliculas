@@ -90,25 +90,66 @@ router.get('/:id', verCalificacionesUsuario);
  *           schema:
  *             $ref: '#/components/schemas/CalificacionInput'
  *     responses:
- *       200:
- *         description: Calificación guardada
+ *       201:
+ *         description: Calificación creada correctamente
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 result:
+ *                 message:
+ *                   type: string
+ *                   example: Calificación agregada
+ *                 data:
  *                   type: object
  *                   properties:
  *                     id:
  *                       type: integer
+ *                       example: 15
+ *                     user_id:
+ *                       type: integer
+ *                       example: 1
+ *                     movie_id:
+ *                       type: integer
+ *                       example: 1
+ *                     platform_id:
+ *                       type: integer
+ *                       example: 1
  *                     rating:
  *                       type: number
+ *                       example: 4
  *                     review:
  *                       type: string
+ *                       example: Buena peli
  *                     created_at:
  *                       type: string
  *                       format: date-time
+ *                       example: 2025-01-01T12:00:00Z
+ * 
+ *       400:
+ *         description: Error en los datos enviados (por ejemplo, calificación duplicada)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Ya existe una calificación para esta película en esta plataforma.
+ *
+ *       500:
+ *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Hubo un error en el servidor
  */
 router.post('/', agregarCalificacion);
 
@@ -142,6 +183,16 @@ router.post('/', agregarCalificacion);
  *     responses:
  *       200:
  *         description: Actualizado correctamente
+ *       500:
+ *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Hubo un error en el servidor
  */
 router.put('/', modificarCalificacion);
 
@@ -166,14 +217,76 @@ router.put('/', modificarCalificacion);
  *             properties:
  *               user_id:
  *                 type: integer
+ *                 example: 1
  *               movie_id:
  *                 type: integer
+ *                 example: 1
  *               platform_id:
  *                 type: integer
+ *                 example: 1
+ * 
  *     responses:
  *       200:
- *         description: Eliminado correctamente
+ *         description: Calificación eliminada correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: Calificación eliminada
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 10
+ *                       user_id:
+ *                         type: integer
+ *                         example: 1
+ *                       movie_id:
+ *                         type: integer
+ *                         example: 1
+ *                       platform_id:
+ *                         type: integer
+ *                         example: 1
+ *                       rating:
+ *                         type: number
+ *                         example: 4
+ *                       review:
+ *                         type: string
+ *                         example: Buena peli
+ *                       created_at:
+ *                         type: string
+ *                         format: date-time
+ *                         example: 2025-01-07T15:30:00.000Z
+ *
+ *       404:
+ *         description: No se encontró la calificación para eliminar
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Calificación no encontrada
+ *
+ *       500:
+ *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Hubo un error
  */
 router.delete('/', quitarCalificacion);
+
 
 export default router

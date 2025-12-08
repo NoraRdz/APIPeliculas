@@ -1,7 +1,6 @@
 /**
  * Módulo para obtener la información de un usuario específico.
- * @module extraerUsuario
- * @namespace Models
+ * @module Models/usuarios/extraerUsuario
  */
 
 import pool from '../../config/postgre.js'
@@ -9,26 +8,25 @@ import pool from '../../config/postgre.js'
 /**
  * Busca un usuario en la base de datos por su ID.
  *
- * Esta función realiza una consulta a la tabla `users` para recuperar
- * todos los datos almacenados asociados al identificador proporcionado.
+ * Esta función consulta la tabla `users` y devuelve el registro que coincide
+ * con el ID proporcionado.
  *
  * @alias module:extraerUsuario
  * @function
  *
- * @param {number|string} id - Identificador único del usuario que se desea buscar.
+ * @param {number|string} id - Identificador único del usuario.
  *
- * @returns {Promise<Array<Object>|string>} Retorna un arreglo que contiene el objeto del usuario encontrado.
- * El objeto incluirá todas las columnas de la tabla `users` (ej. id, username, email, etc.).
- * Si el usuario no existe, el arreglo devuelto estará vacío.
+ * @returns {Promise<Array<Object>|string>} Retorna un arreglo con el usuario encontrado.
+ * El arreglo estará vacío si el usuario no existe.
  *
- * En caso de error en la consulta, retorna el mensaje "Error en el servidor".
+ * En caso de error, retorna "Error en el servidor".
  */
 export default async function extraerUsuario(id) {
 
   try {
     const result = await pool.query(
-        'select * from users where id = $1',
-        [id]
+      'SELECT * FROM users WHERE id = $1',
+      [id]
     );
 
     console.table(result.rows);
