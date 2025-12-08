@@ -1,4 +1,4 @@
-import InsertarCalificacion from "../../../models/calificaciones/InsertarCalificacion.js";
+import insertarCalificacion from "../../../models/calificaciones/insertarCalificacion.js";
 
 /**
  * Controlador para agregar una nueva calificación a una película.
@@ -13,7 +13,7 @@ export default async function agregarCalificacion(req, res) {
   const data = req.body;
 
   try {
-    const result = await InsertarCalificacion(data);
+    const result = await insertarCalificacion(data);
 
     console.log(result);
     if (result.success === false) {

@@ -23,7 +23,7 @@ import {pool} from "../../config/postgre.js";
  *
  * @throws {string} "Error en el servidor" si ocurre un error inesperado.
  */
-export default async function InsertarCalificacion(data) {
+export default async function insertarCalificacion(data) {
   try {
     const { usuarioId, peliculaId, plataformaId, calificacion, comentario } = data;
 
