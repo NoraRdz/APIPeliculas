@@ -3,6 +3,7 @@ const router = express.Router()
 import verCalificacionesUsuario from '../controllers/usuarios/calificaciones/verCalificacionesUsuario.js'
 import agregarCalificacion from '../controllers/usuarios/calificaciones/agregarCalificacion.js'
 import modificarCalificacion from '../controllers/usuarios/calificaciones/modificarCalificacion.js'
+import modificarParteCalificacion from '../controllers/usuarios/calificaciones/modificarParteCalificacion.js'
 import quitarCalificacion from '../controllers/usuarios/calificaciones/quitarCalificacion.js'
 
 
@@ -195,6 +196,106 @@ router.post('/', agregarCalificacion);
  *                   example: Hubo un error en el servidor
  */
 router.put('/', modificarCalificacion);
+
+
+/**
+ * @swagger
+ * /calificaciones:
+ *   patch:
+ *     tags:
+ *       - Calificaciones
+ *     summary: Modifica parcialmente una calificación existente.
+ *     description: Permite actualizar el rating, comentario o plataforma de una calificación. Solo se deben enviar los campos que se desean modificar.
+ *     operationId: modificarParteCalificacion
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - usuarioId
+ *               - peliculaId
+ *             properties:
+ *               usuarioId:
+ *                 type: integer
+ *                 description: ID del usuario que realizó la calificación.
+ *                 example: 101
+ *               peliculaId:
+ *                 type: integer
+ *                 description: ID de la película calificada.
+ *                 example: 25
+ *               calificacion:
+ *                 type: number
+ *                 format: double
+ *                 description: Nueva calificación (rating) a asignar. Opcional.
+ *                 example: 4.5
+ *               comentario:
+ *                 type: string
+ *                 description: Nuevo comentario o reseña de la película. Opcional.
+ *                 example: "Excelente trama y desarrollo de personajes."
+ *               plataformaId:
+ *                 type: integer
+ *                 description: Nuevo ID de la plataforma donde se vio la película. Opcional.
+ *                 example: 3
+ *     responses:
+ *       '200':
+ *         description: Calificación actualizada correctamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Calificación actualizada correctamente"
+ *                 data:
+ *                    type: object
+ *                    properties:
+ *                      usuarioId:
+ *                        type: integer
+ *                      peliculaId:
+ *                        type: integer
+ *                      calificacion:
+ *                        type: number
+ *                      comentario:
+ *                        type: string
+ *                      plataformaId:
+ *                        type: integer
+ *
+ *       '400':
+ *         description: Solicitud inválida (ej. faltan IDs requeridos).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Datos incompletos. Se requieren 'usuarioId' y 'peliculaId'."
+ *       '404':
+ *         description: Calificación no encontrada.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "No se encontró la calificación para el usuario y película especificados."
+ *       '500':
+ *         description: Error interno del servidor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Error interno del servidor."
+ */
+
+router.patch('/', modificarParteCalificacion);
 
 
 
