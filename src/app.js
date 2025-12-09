@@ -10,6 +10,14 @@ import redoc from 'redoc-express'
 import path from 'path'
 import {createTables as crearTabla} from './config/postgre.js';
 const PORT = process.env.PORT 
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+// Servir la carpeta /src/public
+app.use(express.static(path.join(__dirname, 'public')));
 
 crearTabla();
 
@@ -19,6 +27,8 @@ app.use(cors())
 app.use(morgan('tiny'))
 
 const docsPath = path.join(process.cwd(), 'doc');
+
+
 
 app.use('/docs-js', express.static(docsPath));
 
@@ -55,7 +65,6 @@ app.use('/genero', generos)
 
 import notFound from './middleware/error/notFound.js'
 import  errorHandler  from "./middleware/error/errorHandler.js";
-import { createTables } from './config/postgre.js'
 
 // Registrar notFound antes del manejador de errores
 app.use(notFound)
