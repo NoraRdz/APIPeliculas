@@ -1,4 +1,4 @@
-import insertarPlataforma from "../../models/generos/insertarPlataforma.js";
+import insertarPlataforma from "../../models/plataforma/insertarPlataforma.js";
 
 /**
  * Controlador para registrar una nueva plataforma en la base de datos.

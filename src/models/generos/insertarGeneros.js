@@ -23,7 +23,7 @@ export default async function insertarGeneros(genero) {
 
     const result = await pool.query(
       `
-        insert into genre (nombre)
+        insert into genre(nombre)
         values($1)
         RETURNING *;
       `,
