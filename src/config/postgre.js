@@ -6,9 +6,9 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT, // Puerto por defecto de PostgreSQL
-  ssl: {
-    rejectUnauthorized: false
-  }
+  // ssl: {
+  //   rejectUnauthorized: false
+  // }
 });
 
 
@@ -71,46 +71,6 @@ const createTables = async () => {
           created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP
       );
     `);
-
-       // 2️⃣ Insertar plataformas solo si la tabla está vacía
-    const { rows: rowsPlatforms } = await pool.query(`SELECT COUNT(*) FROM platforms`);
-    const platformsCount = Number(rowsPlatforms[0].count);
-
-    if (platformsCount === 0) {
-      await pool.query(`
-        INSERT INTO platforms (p_name)
-        VALUES 
-          ('Netflix'),
-          ('Prime Video'),
-          ('HBOMax'),
-          ('Disney+')
-        ON CONFLICT (p_name) DO NOTHING;
-      `);
-      console.log("Plataformas insertadas.");
-    }
-
-    // 3️⃣ Insertar géneros solo si la tabla genre está vacía
-    const { rows: rowsGenres } = await pool.query(`SELECT COUNT(*) FROM genre`);
-    const genreCount = Number(rowsGenres[0].count);
-
-    if (genreCount === 0) {
-      await pool.query(`
-        INSERT INTO genre (nombre)
-        VALUES
-          ('Acción'),
-          ('Aventura'),
-          ('Comedia'),
-          ('Drama'),
-          ('Terror'),
-          ('Ciencia Ficción'),
-          ('Fantasía'),
-          ('Suspenso'),
-          ('Romance'),
-          ('Animación')
-        ON CONFLICT (nombre) DO NOTHING;
-      `);
-      console.log("Géneros insertados.");
-    }
 
     console.log("Tablas creadas correctamente");
   } catch (err) {

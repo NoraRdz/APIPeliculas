@@ -19,6 +19,8 @@ import agregarPeliculas from "../../models/peliculas/agregarPeliculas.js";
  *
  * @returns {void} Devuelve una respuesta JSON indicando el resultado del registro.
  */
+
+
 export default async function postPeliculas(req, res) {
     const { titulo, estreno, sinopsis } = req.body;
     console.log(titulo, estreno, sinopsis);
