@@ -3,6 +3,7 @@ const router = express.Router()
 
 import getPlataformas from "../controllers/plataforma/obtenerPlataformas.js"
 import agregarPlataformas from "../controllers/plataforma/agregarPlataformas.js"
+import asignarPeliculaPlataforma from "../controllers/plataforma/asignarPeliculaPlataforma.js"
 
 
 /**
@@ -93,6 +94,80 @@ router.get('/', getPlataformas)
 
 router.post('/', agregarPlataformas)
 
+
+/**
+ * @swagger
+ * /plataforma/pelicula:
+ *   post:
+ *     summary: Asigna una película a una plataforma
+ *     tags: [Plataformas]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - pelicula
+ *               - plataforma
+ *               - publicacion
+ *             properties:
+ *               pelicula:
+ *                 type: string
+ *                 description: Título de la película
+ *                 example: Inception
+ *               plataforma:
+ *                 type: string
+ *                 description: Nombre de la plataforma
+ *                 example: Netflix
+ *               publicacion:
+ *                 type: string
+ *                 description: Fecha o información de disponibilidad
+ *                 example: "2023-05-10"
+ *     responses:
+ *       200:
+ *         description: Película asignada correctamente a la plataforma
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Película asignada a plataforma correctamente
+ *                 data:
+ *                   type: object
+ *       400:
+ *         description: Datos incompletos o incorrectos
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Los campos 'pelicula', 'plataforma' y 'publicacion' son requeridos"
+ *       500:
+ *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 error:
+ *                   type: string
+ *                   example: Error al asignar película a plataforma
+ */
+
+router.post('/pelicula', asignarPeliculaPlataforma)
 
 
 export default router

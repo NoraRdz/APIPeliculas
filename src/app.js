@@ -11,6 +11,8 @@ import path from 'path'
 import {createTables as crearTabla} from './config/postgre.js';
 const PORT = process.env.PORT 
 import { fileURLToPath } from 'url';
+import cambiarValoresALower from './middleware/cambiarValoresALower.js'
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,7 +27,6 @@ crearTabla();
 app.use(express.json());
 app.use(cors())
 app.use(morgan('tiny'))
-
 const docsPath = path.join(process.cwd(), 'doc');
 
 
@@ -55,7 +56,7 @@ import peliculas from './router/peliculas.js'
 import usuarios from './router/usuario.js'
 import generos from './router/generos.js'
 
-
+app.use(cambiarValoresALower)
 app.use('/usuario',usuarios)
 app.use('/plataforma', plataformas)
 app.use('/pelicula',peliculas)

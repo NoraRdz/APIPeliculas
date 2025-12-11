@@ -9,6 +9,7 @@ import verPeliculasGeneros from "../controllers/peliculas/verPeliculasGeneros.js
 import verCalificacionPeliculas from "../controllers/peliculas/verCalificacionPeliculas.js";
 import validacionPelicula from "../middleware/validacionPelicula.js";
 import customUpload from "../middleware/customUpload.js";
+import agregarCalificacionPelicula from "../controllers/peliculas/agregarCalificacionPelicula.js";
 
 /**
  * @swagger
@@ -203,6 +204,104 @@ router.get('/plataforma/:name', verPeliculasPlataforma);
  *                       total_reviews: { type: integer }
  */
 router.get('/calificacion', verCalificacionPeliculas);
+
+/**
+ * @swagger
+ * /pelicula/calificacion:
+ *   post:
+ *     summary: Registra una nueva calificación para una película en una plataforma
+ *     tags: [Peliculas]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - usuario
+ *               - pelicula
+ *               - plataforma
+ *               - calificacion
+ *             properties:
+ *               usuario:
+ *                 type: string
+ *                 description: Nombre del usuario que realiza la calificación
+ *                 example: "juan23"
+ *               pelicula:
+ *                 type: string
+ *                 description: Título de la película a calificar
+ *                 example: "Inception"
+ *               plataforma:
+ *                 type: string
+ *                 description: Nombre de la plataforma donde se registra la calificación
+ *                 example: "Netflix"
+ *               calificacion:
+ *                 type: number
+ *                 description: Valor numérico de la calificación (ej. 1-5)
+ *                 example: 4.5
+ *               review:
+ *                 type: string
+ *                 description: Reseña opcional del usuario
+ *                 example: "Muy buena película, efectos increíbles."
+ *
+ *     responses:
+ *       200:
+ *         description: Calificación registrada correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Calificación registrada correctamente"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     user_id:
+ *                       type: integer
+ *                     movie_id:
+ *                       type: integer
+ *                     platform_id:
+ *                       type: integer
+ *                     rating:
+ *                       type: number
+ *                     review:
+ *                       type: string
+ *
+ *       400:
+ *         description: Datos incompletos enviados por el cliente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Los campos 'usuario', 'pelicula', 'plataforma' y 'calificacion' son requeridos"
+ *
+ *       500:
+ *         description: Error interno del servidor
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 message:
+ *                   type: string
+ */
+
+router.post('/calificacion', agregarCalificacionPelicula);
 
 
 
