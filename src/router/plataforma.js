@@ -31,7 +31,6 @@ import asignarPeliculaPlataforma from "../controllers/plataforma/asignarPelicula
  *
  *           response = requests.get("https://apipeliculas-production-a074.up.railway.app/plataforma")
  *           print(response.json())
- *     tags: [Plataformas]
  *     responses:
  *       200:
  *         description: Lista obtenida correctamente
@@ -99,7 +98,6 @@ router.get('/', getPlataformas)
  *           )
  *
  *           print(response.json())
- *     tags: [Plataformas]
  *     requestBody:
  *       required: true
  *       content:
@@ -198,29 +196,6 @@ router.post('/', agregarPlataformas)
  *           )
  *
  *           print(response.json())
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - pelicula
- *               - plataforma
- *               - publicacion
- *             properties:
- *               pelicula:
- *                 type: string
- *                 description: Título de la película
- *                 example: Inception
- *               plataforma:
- *                 type: string
- *                 description: Nombre de la plataforma
- *                 example: Netflix
- *               publicacion:
- *                 type: string
- *                 description: Fecha o información de disponibilidad
- *                 example: "2023-05-10"
  *     responses:
  *       200:
  *         description: Película asignada correctamente a la plataforma
