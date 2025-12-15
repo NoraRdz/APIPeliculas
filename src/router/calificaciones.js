@@ -63,6 +63,20 @@ import quitarCalificacion from '../controllers/usuarios/calificaciones/quitarCal
  *         required: true
  *         schema:
  *           type: integer
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/usuario/calificacion/1")
+ *             .then(res => res.json())
+ *             .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           response = requests.get(
+ *               "https://apipeliculas-production-a074.up.railway.app/usuario/calificacion/1"
+ *           )
+ *           print(response.json())
  *     responses:
  *       200:
  *         description: Historial recuperado
@@ -84,6 +98,42 @@ router.get('/:id', verCalificacionesUsuario);
  *   post:
  *     summary: Agregar nueva calificación
  *     tags: [Calificaciones]
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/usuario/calificacion", {
+ *             method: "POST",
+ *             headers: {
+ *               "Content-Type": "application/json"
+ *             },
+ *             body: JSON.stringify({
+ *               userId: 1,
+ *               peliculaId: 2,
+ *               plataformaId: 3,
+ *               calificacion: 4.5,
+ *               comentario: "Muy buena película"
+ *             })
+ *           })
+ *           .then(res => res.json())
+ *           .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           payload = {
+ *               "userId": 1,
+ *               "peliculaId": 2,
+ *               "plataformaId": 3,
+ *               "calificacion": 4.5,
+ *               "comentario": "Muy buena película"
+ *           }
+ *
+ *           response = requests.post(
+ *               "https://apipeliculas-production-a074.up.railway.app/usuario/calificacion",
+ *               json=payload
+ *           )
+ *
+ *           print(response.json())
  *     requestBody:
  *       required: true
  *       content:
@@ -160,6 +210,42 @@ router.post('/', agregarCalificacion);
  *   put:
  *     summary: Modificar calificación existente
  *     tags: [Calificaciones]
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/usuario/calificacion", {
+ *             method: "PUT",
+ *             headers: {
+ *               "Content-Type": "application/json"
+ *             },
+ *             body: JSON.stringify({
+ *               userId: 1,
+ *               movieId: 2,
+ *               platform_id: 3,
+ *               rating: 5,
+ *               review: "Me gustó más que antes"
+ *             })
+ *           })
+ *           .then(res => res.json())
+ *           .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           payload = {
+ *               "userId": 1,
+ *               "movieId": 2,
+ *               "platform_id": 3,
+ *               "rating": 5,
+ *               "review": "Me gustó más que antes"
+ *           }
+ *
+ *           response = requests.put(
+ *               "https://apipeliculas-production-a074.up.railway.app/usuario/calificacion",
+ *               json=payload
+ *           )
+ *
+ *           print(response.json())
  *     requestBody:
  *       required: true
  *       content:
@@ -205,6 +291,39 @@ router.put('/', modificarCalificacion);
  *     tags:
  *       - Calificaciones
  *     summary: Modifica parcialmente una calificación existente.
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/calificaciones", {
+ *             method: "PATCH",
+ *             headers: {
+ *               "Content-Type": "application/json"
+ *             },
+ *             body: JSON.stringify({
+ *               usuarioId: 1,
+ *               peliculaId: 25,
+ *               calificacion: 4.5
+ *             })
+ *           })
+ *           .then(res => res.json())
+ *           .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           payload = {
+ *               "usuarioId": 1,
+ *               "peliculaId": 25,
+ *               "calificacion": 4.5
+ *           }
+ *
+ *           response = requests.patch(
+ *               "https://apipeliculas-production-a074.up.railway.app/calificaciones",
+ *               json=payload
+ *           )
+ *
+ *           print(response.json())
+
  *     description: Permite actualizar el rating, comentario o plataforma de una calificación. Solo se deben enviar los campos que se desean modificar.
  *     operationId: modificarParteCalificacion
  *     requestBody:
@@ -305,6 +424,38 @@ router.patch('/', modificarParteCalificacion);
  *   delete:
  *     summary: Eliminar una calificación
  *     tags: [Calificaciones]
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/usuario/calificacion", {
+ *             method: "DELETE",
+ *             headers: {
+ *               "Content-Type": "application/json"
+ *             },
+ *             body: JSON.stringify({
+ *               user_id: 1,
+ *               movie_id: 1,
+ *               platform_id: 1
+ *             })
+ *           })
+ *           .then(res => res.json())
+ *           .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           payload = {
+ *               "user_id": 1,
+ *               "movie_id": 1,
+ *               "platform_id": 1
+ *           }
+ *
+ *           response = requests.delete(
+ *               "https://apipeliculas-production-a074.up.railway.app/usuario/calificacion",
+ *               json=payload
+ *           )
+ *
+ *           print(response.json())
  *     requestBody:
  *       required: true
  *       content:

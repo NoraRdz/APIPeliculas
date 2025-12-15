@@ -17,7 +17,20 @@ import asignarPeliculaPlataforma from "../controllers/plataforma/asignarPelicula
  * @swagger
  * /plataforma:
  *   get:
- *     summary: Obtiene la lista de todas las plataformas
+ *     summary: Obtiene la lista de todas las plataformas   
+ *     tags: [Plataformas]
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/plataforma")
+ *             .then(res => res.json())
+ *             .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           response = requests.get("https://apipeliculas-production-a074.up.railway.app/plataforma")
+ *           print(response.json())
  *     tags: [Plataformas]
  *     responses:
  *       200:
@@ -57,6 +70,35 @@ router.get('/', getPlataformas)
  * /plataforma:
  *   post:
  *     summary: Registra una nueva plataforma
+ *     tags: [Plataformas]
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/plataforma", {
+ *             method: "POST",
+ *             headers: {
+ *               "Content-Type": "application/json"
+ *             },
+ *             body: JSON.stringify({
+ *               plataforma: "HBO Max"
+ *             })
+ *           })
+ *           .then(res => res.json())
+ *           .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           payload = {
+ *               "plataforma": "HBO Max"
+ *           }
+ *
+ *           response = requests.post(
+ *               "https://apipeliculas-production-a074.up.railway.app/plataforma",
+ *               json=payload
+ *           )
+ *
+ *           print(response.json())
  *     tags: [Plataformas]
  *     requestBody:
  *       required: true
@@ -101,6 +143,61 @@ router.post('/', agregarPlataformas)
  *   post:
  *     summary: Asigna una película a una plataforma
  *     tags: [Plataformas]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - pelicula
+ *               - plataforma
+ *               - publicacion
+ *             properties:
+ *               pelicula:
+ *                 type: string
+ *                 description: Título de la película
+ *                 example: Inception
+ *               plataforma:
+ *                 type: string
+ *                 description: Nombre de la plataforma
+ *                 example: Netflix
+ *               publicacion:
+ *                 type: string
+ *                 description: Fecha o información de disponibilidad
+ *                 example: "2023-05-10"
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/plataforma/pelicula", {
+ *             method: "POST",
+ *             headers: {
+ *               "Content-Type": "application/json"
+ *             },
+ *             body: JSON.stringify({
+ *               pelicula: "Inception",
+ *               plataforma: "Netflix",
+ *               publicacion: "2023-05-10"
+ *             })
+ *           })
+ *           .then(res => res.json())
+ *           .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           payload = {
+ *               "pelicula": "Inception",
+ *               "plataforma": "Netflix",
+ *               "publicacion": "2023-05-10"
+ *           }
+ *
+ *           response = requests.post(
+ *               "https://apipeliculas-production-a074.up.railway.app/plataforma/pelicula",
+ *               json=payload
+ *           )
+ *
+ *           print(response.json())
  *     requestBody:
  *       required: true
  *       content:

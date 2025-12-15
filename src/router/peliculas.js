@@ -73,6 +73,17 @@ import agregarCalificacionPelicula from "../controllers/peliculas/agregarCalific
  *   get:
  *     summary: Obtiene todas las películas con estadísticas
  *     tags: [Peliculas]
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/pelicula")
+ *             .then(res => res.json())
+ *             .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *           response = requests.get("https://apipeliculas-production-a074.up.railway.app/pelicula")
+ *           print(response.json())
  *     responses:
  *       200:
  *         description: Catálogo completo con promedios y total de reseñas
@@ -110,6 +121,20 @@ router.get('/',verPeliculas)
  *         schema:
  *           type: string
  *         description: Nombre del género (ej. Terror)
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/pelicula/genero?name=Terror")
+ *             .then(res => res.json())
+ *             .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *           response = requests.get(
+ *               "https://apipeliculas-production-a074.up.railway.app/pelicula/genero",
+ *               params={"name": "Terror"}
+ *           )
+ *           print(response.json())
  *     responses:
  *       200:
  *         description: Datos obtenidos correctamente
@@ -147,6 +172,19 @@ router.get('/genero', verPeliculasGeneros);
  *         description: Nombre de la plataforma (ej. Netflix)
  *         schema:
  *           type: string
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/pelicula/plataforma/Netflix")
+ *             .then(res => res.json())
+ *             .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *           response = requests.get(
+ *               "https://apipeliculas-production-a074.up.railway.app/pelicula/plataforma/Netflix"
+ *           )
+ *           print(response.json())
  *     responses:
  *       200:
  *         description: Lista de películas
@@ -167,7 +205,6 @@ router.get('/genero', verPeliculasGeneros);
  */
 router.get('/plataforma/:name', verPeliculasPlataforma);
 
-
 /**
  * @swagger
  * /pelicula/calificacion:
@@ -180,6 +217,20 @@ router.get('/plataforma/:name', verPeliculasPlataforma);
  *         schema:
  *           type: string
  *         description: Filtrar por nombre de plataforma
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/pelicula/calificacion?plataforma=Netflix")
+ *             .then(res => res.json())
+ *             .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *           response = requests.get(
+ *               "https://apipeliculas-production-a074.up.railway.app/pelicula/calificacion",
+ *               params={"plataforma": "Netflix"}
+ *           )
+ *           print(response.json())
  *     responses:
  *       200:
  *         description: Estadísticas de calificación
@@ -211,6 +262,35 @@ router.get('/calificacion', verCalificacionPeliculas);
  *   post:
  *     summary: Registra una nueva calificación para una película en una plataforma
  *     tags: [Peliculas]
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/pelicula/calificacion", {
+ *             method: "POST",
+ *             headers: { "Content-Type": "application/json" },
+ *             body: JSON.stringify({
+ *               usuario: "juan23",
+ *               pelicula: "Inception",
+ *               plataforma: "Netflix",
+ *               calificacion: 4.5,
+ *               review: "Muy buena película"
+ *             })
+ *           });
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *           payload = {
+ *             "usuario": "juan23",
+ *             "pelicula": "Inception",
+ *             "plataforma": "Netflix",
+ *             "calificacion": 4.5,
+ *             "review": "Muy buena película"
+ *           }
+ *           response = requests.post(
+ *               "https://apipeliculas-production-a074.up.railway.app/pelicula/calificacion",
+ *               json=payload
+ *           )
+ *           print(response.json())
  *     requestBody:
  *       required: true
  *       content:
@@ -300,10 +380,7 @@ router.get('/calificacion', verCalificacionPeliculas);
  *                 message:
  *                   type: string
  */
-
 router.post('/calificacion', agregarCalificacionPelicula);
-
-
 
 /**
  * @swagger
@@ -311,8 +388,33 @@ router.post('/calificacion', agregarCalificacionPelicula);
  *   post:
  *     summary: Crea una nueva película (con imagen)
  *     tags: [Peliculas]
- *     consumes:
- *       - multipart/form-data
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/pelicula", {
+ *             method: "POST",
+ *             headers: { "Content-Type": "application/json" },
+ *             body: JSON.stringify({
+ *               usuario: "juan23",
+ *               pelicula: "Inception",
+ *               plataforma: "Netflix",
+ *               calificacion: 4.5,
+ *               review: "Muy buena película"
+ *             })
+ *           });
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *           response = requests.post(
+ *               "https://apipeliculas-production-a074.up.railway.app/pelicula",
+ *               files={
+ *                 "titulo": "Interstellar",
+ *                 "estreno": 2014,
+ *                 "sinopsis": "Viaje espacial"
+ *               }
+ *           )
+ *           print(response.json())
  *     requestBody:
  *       required: true
  *       content:
@@ -329,9 +431,7 @@ router.post('/calificacion', agregarCalificacionPelicula);
  *                 type: integer
  *               sinopsis:
  *                 type: string
- *               archivo:
- *                 type: string
- *                 format: binary
+ * 
  *     responses:
  *       200:
  *         description: Película creada
@@ -355,6 +455,7 @@ router.post('/calificacion', agregarCalificacionPelicula);
  *       400:
  *         description: Error de validación
  */
-router.post('/', customUpload.single('archivo'), validacionPelicula, postPeliculas);
+router.post('/', validacionPelicula, postPeliculas);
+
 
 export default router

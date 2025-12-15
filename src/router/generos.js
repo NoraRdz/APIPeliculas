@@ -37,6 +37,18 @@ import asignarGenerosPeliculas from "../controllers/generos/asignarGenerosPelicu
  *   get:
  *     summary: Obtiene la lista de géneros disponibles
  *     tags: [Generos]
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/genero")
+ *             .then(res => res.json())
+ *             .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           response = requests.get("https://apipeliculas-production-a074.up.railway.app/genero")
+ *           print(response.json())
  *     responses:
  *       200:
  *         description: Lista de géneros
@@ -63,6 +75,34 @@ router.get('/',verGeneros)
  *     summary: Registrar un nuevo género
  *     tags: [Generos]
  *     description: Inserta un nuevo género en la base de datos.
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/genero", {
+ *             method: "POST",
+ *             headers: {
+ *               "Content-Type": "application/json"
+ *             },
+ *             body: JSON.stringify({
+ *               genero: "Acción"
+ *             })
+ *           })
+ *           .then(res => res.json())
+ *           .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           payload = {
+ *               "genero": "Acción"
+ *           }
+ *
+ *           response = requests.post(
+ *               "https://apipeliculas-production-a074.up.railway.app/genero",
+ *               json=payload
+ *           )
+ *
+ *           print(response.json())
  *     requestBody:
  *       required: true
  *       content:
@@ -135,6 +175,36 @@ router.post('/',agregarGeneros)
  *     summary: Asignar un género a una película
  *     tags: [Generos]
  *     description: Asocia un género existente a una película existente en la base de datos.
+ *     x-codeSamples:
+ *       - lang: javascript
+ *         source: |
+ *           fetch("https://apipeliculas-production-a074.up.railway.app/genero/pelicula", {
+ *             method: "POST",
+ *             headers: {
+ *               "Content-Type": "application/json"
+ *             },
+ *             body: JSON.stringify({
+ *               pelicula: "Titanic",
+ *               genero: "Drama"
+ *             })
+ *           })
+ *           .then(res => res.json())
+ *           .then(data => console.log(data));
+ *       - lang: python
+ *         source: |
+ *           import requests
+ *
+ *           payload = {
+ *               "pelicula": "Titanic",
+ *               "genero": "Drama"
+ *           }
+ *
+ *           response = requests.post(
+ *               "https://apipeliculas-production-a074.up.railway.app/genero/pelicula",
+ *               json=payload
+ *           )
+ *
+ *           print(response.json())
  *     requestBody:
  *       required: true
  *       content:
