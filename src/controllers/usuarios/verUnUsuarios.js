@@ -15,11 +15,22 @@ export default async function verUnUsuario(req,res){
      try {
             const result = await extraerUsuario(id);
             console.log(result)
-            res.status(200).json({
-                result
-            })
-    
-        } catch (error) {
-            res.status(500).json({"message":"Hubo un error"})
+                  if(!result || result.length === 0){
+        return res.status(404).json({
+            "success": false,
+            "message": "No existen usuarios registrados"
+        })
         }
+        res.status(200).json({
+           "success": true,
+            "message": "Usuarios obtenidos correctamente",
+            "data": result
+        })
+
+    } catch (error) {
+         res.status(500).json({
+            "success": false,
+            "message": "Ocurrió un error inesperado",
+        })
+    }
 }

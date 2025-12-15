@@ -15,11 +15,22 @@ export default async function verCalificacionesUsuario(req,res){
      try {
             const result = await extraerCalificacionesUsuario(id);
             console.log(result)
-            res.status(200).json({
-                result
+            if(!result || result.length === 0){
+            return res.status(404).json({
+                "success": false,
+                "message": "No existen calificaciones registradas de este usuario"
             })
-    
+            }
+            res.status(200).json({
+            "success": true,
+                "message": "Calificaciones creadas obtenidos correctamente",
+                "data": result
+            })
+
         } catch (error) {
-            res.status(500).json({"message":"Hubo un error"})
+            res.status(500).json({
+                "success": false,
+                "message": "Ocurrió un error inesperado",
+            })
         }
 }

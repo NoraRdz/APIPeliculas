@@ -12,7 +12,12 @@ const swaggerOptions = {
             {
                 url:'http://localhost:PORT'.replace('PORT', PORT),
                 description: 'Servidor local'
+            },
+            {
+                url: "https://apipeliculas-production-a074.up.railway.app",
+                description: "Servidor producción"
             }
+    
         ]
     },
     // Cambiado para apuntar a los archivos reales dentro de src/router
