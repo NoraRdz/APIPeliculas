@@ -11,7 +11,7 @@ import path from 'path'
 import {createTables as crearTabla} from './config/postgre.js';
 const PORT = process.env.PORT 
 import { fileURLToPath } from 'url';
-import cambiarValoresALower from './middleware/cambiarValoresALower.js'
+import {cambiarValoresALower,convertValuesToLowercase} from './middleware/cambiarValoresALower.js'
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +25,12 @@ crearTabla();
 
 
 app.use(express.json());
+app.use((req, res, next) => {
+    if (req.body && typeof req.body === 'object') {
+        req.body = convertValuesToLowercase(req.body);
+    }
+    next();
+});
 app.use(cors())
 app.use(morgan('tiny'))
 const docsPath = path.join(process.cwd(), 'doc');

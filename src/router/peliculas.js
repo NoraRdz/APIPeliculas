@@ -396,12 +396,10 @@ router.post('/calificacion', agregarCalificacionPelicula);
  *             method: "POST",
  *             headers: { "Content-Type": "application/json" },
  *             body: JSON.stringify({
- *               usuario: "juan23",
- *               pelicula: "Inception",
- *               plataforma: "Netflix",
- *               calificacion: 4.5,
- *               review: "Muy buena película"
- *             })
+ *                 "titulo": "Interstellar",
+ *                 "estreno": 2014,
+ *                 "sinopsis": "Viaje espacial"
+ *               })
  *           });
  *       - lang: python
  *         source: |

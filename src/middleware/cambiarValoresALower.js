@@ -1,4 +1,4 @@
-export default function cambiarValoresALower(req, res, next) {
+export function cambiarValoresALower(req, res, next) {
     // Guardamos las funciones originales
     const originalJson = res.json;
     const originalSend = res.send;
@@ -21,7 +21,7 @@ export default function cambiarValoresALower(req, res, next) {
 };
 
 // Función recursiva que SOLO baja valores, no keys
-function convertValuesToLowercase(data) {
+export function convertValuesToLowercase(data) {
     if (typeof data === "string") {
         return data.toLowerCase();
     }
